@@ -23,7 +23,7 @@ public class DialogRowData
     public string characterName;
     public string text;
     public int? nextid;
-    public string protraitPath;
+    public string portraitPath;
     public string choiceText;
     public int? choiceNextid;
 }
@@ -200,12 +200,12 @@ public class JsonToScriptableConverter : EditorWindow
                 dialogSO.characterName = rowData.characterName;
                 dialogSO.text = rowData.text;
                 dialogSO.nextld = rowData.nextid.HasValue ? rowData.nextid.Value : -1;
-                dialogSO.portraitPath = rowData.protraitPath;
+                dialogSO.portraitPath = rowData.portraitPath;
                 dialogSO.choices = new List<DialogChoiceSO>();
 
-                if (!string.IsNullOrEmpty(rowData.protraitPath))
+                if (!string.IsNullOrEmpty(rowData.portraitPath))
                 {
-                    dialogSO.portrait = Resources.Load<Sprite>(rowData.protraitPath);
+                    dialogSO.portrait = Resources.Load<Sprite>(rowData.portraitPath);
                         
                     if (dialogSO.portrait == null)
                     {
@@ -258,7 +258,7 @@ public class JsonToScriptableConverter : EditorWindow
             foreach(var dialog in createDialogs)
             {
 
-                string assetPath = $"{outputFolder}/Dialog {dialog.id.ToString("D4")}.asset";
+                string assetPath = $"{outputFolder}/Dialog_{dialog.id.ToString("D4")}.asset";
                 AssetDatabase.CreateAsset(dialog, assetPath);
 
                 dialog.name = $"Dialog_{dialog.id.ToString("D4")}";
